@@ -1,4 +1,5 @@
 from django.db import models
+from apps.core.models import OpenHours
 
 
 class Institute(models.Model):
@@ -7,24 +8,13 @@ class Institute(models.Model):
     website = models.URLField()
     address = models.ForeignKey('core.Address', blank=False, null=True)
 
+    def __str__(self):
+        return self.name
 
-class OpenHours(models.Model):
-    DAY_CHOICES = (
-        ('MON', 'Monday'),
-        ('TUE', 'Tuesday'),
-        ('WED', 'Wednesday'),
-        ('THU', 'Thursday'),
-        ('FRI', 'Friday'),
-        ('SAT', 'Saturday'),
-        ('SUN', 'Sunday')
-    )
 
-    institute = models.ForeignKey(
-        'institutions.Institute', blank=False, null=False)
-    day_of_week = models.CharField(
-        choices=DAY_CHOICES, max_length=3, blank=False, null=False)
-    opens_at = models.PositiveSmallIntegerField(blank=False, null=False)
-    closes_at = models.PositiveSmallIntegerField(blank=False, null=False)
+class InstituteOpenHours(OpenHours):
+    institute_fk = models.ForeignKey(
+        'institutions.Institute', null=False, blank=False)
 
 
 class SocialMedia(models.Model):

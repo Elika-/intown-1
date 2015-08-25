@@ -1,4 +1,5 @@
 from django.db import models
+from apps.core.models import OpenHours
 
 
 class Event(models.Model):
@@ -11,6 +12,16 @@ class Event(models.Model):
         'institutions.Institute', blank=False, null=False)
     address = models.ForeignKey('core.Address', null=True)
 
+    def __str__(self):
+        return self.title
+
 
 class EventType(models.Model):
     name = models.CharField(max_length=50, blank=False, null=False)
+
+    def __str__(self):
+        return self.name
+
+
+class EventOpenHours(OpenHours):
+    event_fk = models.ForeignKey('events.Event', blank=False, null=False)
