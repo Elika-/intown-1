@@ -12,7 +12,7 @@ class Event(models.Model):
     event_type = models.ForeignKey('events.EventType', blank=False, null=False)
     institute = models.ForeignKey(
         'institutions.Institute', blank=False, null=False)
-    address = models.ForeignKey('core.Address', null=True)
+    address = models.ForeignKey('core.Address', blank=True, null=True)
 
     def __str__(self):
         return self.title
