@@ -6,7 +6,8 @@ class Event(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False)
     description = models.CharField(max_length=2000, blank=False, null=False)
     price = models.DecimalField(
-        decimal_places=2, max_digits=5, blank=False, null=False)
+        decimal_places=2, max_digits=5, blank=False, null=False,
+        min_value=0.00)
     event_type = models.ForeignKey('events.EventType', blank=False, null=False)
     institute = models.ForeignKey(
         'institutions.Institute', blank=False, null=False)
